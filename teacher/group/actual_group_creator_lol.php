@@ -22,8 +22,9 @@ if ($group_exists->rowCount()) {
     array_push($resp['errors'], 'Group ID already exists');
 } else {
     $group_add->execute([$group_id, $comment, $sem, $branch]);
-    foreach($students as $user_id)
-        $member_add->execute([$group_id,$user_id]);
+    if($students)
+        foreach($students as $user_id)
+            $member_add->execute([$group_id,$user_id]);
     $resp['status'] = 'success';
 }
 

@@ -24,6 +24,7 @@ include_once("../../header.php");
 <body>
     <?= $html ?>
     <div class="contianer-fluid mx-auto">
+        <a href="../" class='btn btn-primary'>Go Back</a>
         <div class='container form-box bg-light border border-dark p-sm-3'>
             <form action="" id='group-form'>
                 <div class='row mb-3'>
@@ -114,18 +115,18 @@ include_once("../../header.php");
 
         function submitForm() {
             let data = {}
-            $('#group-form :input').each(function(){
+            $('#group-form :input').each(function() {
                 let input = $(this)[0];
                 data[input.name] = input.value;
             })
             data['students'] = group_userids;
             $.ajax({
-                url:'actual_group_creator_lol.php',
-                method:"POST",
-                data:data,
-                success:function(response){
+                url: 'actual_group_creator_lol.php',
+                method: "POST",
+                data: data,
+                success: function(response) {
                     console.log(response);
-                    response=JSON.parse(response);
+                    response = JSON.parse(response);
                     console.log(response);
                 }
             })

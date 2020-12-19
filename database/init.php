@@ -53,6 +53,20 @@
     create table subject(subject_id varchar(10) primary key not null,
                          title varchar(256) not null);
     ','subject table creation');
-
+    create_table('
+        create table sgroup_subjects(subject_id varchar(10) not null,
+                                     group_id varchar(60) not null,
+                                     primary key(subject_id,group_id),
+                                     foreign key(subject_id) references subject(subject_id),
+                                     foreign key(group_id) references sgroup(group_id));
+    ','group_subjects table creation');
     
+    create_table('
+        create table internal(
+            internal_id integer primary key not null auto_increment,
+            subject_id varchar(10) not null,
+            title varchar(60) not null,
+            max_marks integer not null,
+            foreign key(subject_id) references subject(subject_id));
+    ','Internals table creation');
 ?>
