@@ -1,5 +1,7 @@
 <?php
-include_once('../header.php')
+include_once('../header.php');
+include_once('../lemons.php');
+accessAdmin();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,6 +60,14 @@ include_once('../header.php')
                     </svg>
                     <div class='d-grid gap-2'>
                         <a href="#" class='streatchable-link btn btn-block btn-primary rounded-0' data-bs-toggle="modal" data-bs-target="#modifyModal">MODIFY</a>
+                    </div>
+                </div>
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+                        <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
+                    </svg>
+                    <div class='d-grid gap-2'>
+                        <a href="#" class='streatchable-link btn btn-block btn-primary rounded-0' data-bs-toggle="modal" data-bs-target="#annoucementModal">Make Announcement</a>
                     </div>
                 </div>
             </div>
@@ -310,14 +320,45 @@ include_once('../header.php')
                         </div>
                     </form>
                 </div>
-                <!-- <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div> -->
+            </div>
+        </div>
+    </div>
+    <!-- announcement modal -->
+    <div class="modal fade" id="annoucementModal" tabindex="-1" aria-labelledby="annoucementModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Announcement Form</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                        <div class='form-floating'>
+                            <input type="text" class='form-control' name='body' id='announcement_body' placeholder="Announcement Text">
+                            <label>Announcement Text</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" onclick="announce()">Submit</button>
+                </div>
             </div>
         </div>
     </div>
     <script src="main.js"></script>
+    <script>
+        function announce(){
+            let body = $('#announcement_body')[0].value;
+            $.ajax({
+                url:"user/make_announcement.php",
+                method:'POST',
+                data:{body:body},
+                success:function(resp){
+                    console.log(resp);
+                }
+            })
+        }
+    </script>
 </body>
 
 </html>

@@ -1,5 +1,8 @@
 <?php
 include_once("../header.php");
+include_once("../lemons.php");
+accessFaculty();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +27,6 @@ include_once("../header.php");
 <body class='bg-light'>
     <?= $html ?>
     <div class="container">
-        <h1 class='display-1'> Teacher Panel</h1>
         <div class='group-menu container-fluid mb-4'>
             <h2>Groups Menu</h1>
                 <div class='row'>

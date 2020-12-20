@@ -84,7 +84,7 @@ foreach ($attendance_rows as $row) {
                     <div class='container'>
                         <?php foreach ($subject_internals as $subject_id => $internals) { ?>
 
-                            <table class='table  caption-top table-bordered table-hover'>
+                            <table class='table  caption-top table-bordered border-dark table-hover'>
                                 <caption> <?= $subject_id ?> <?= $subject_title_map[$subject_id] ?> </caption>
 
                                 <thead class='table-dark'>
@@ -120,7 +120,7 @@ foreach ($attendance_rows as $row) {
                     <div class='container'>
                         <?php foreach ($subject_attendances as $subject_id => $attendances) { ?>
 
-                            <table class='table  caption-top table-bordered table-hover'>
+                            <table class='table  caption-top table-bordered border-dark table-hover'>
                                 <caption> <?= $subject_id ?> <?= $subject_title_map[$subject_id] ?> </caption>
 
                                 <thead class='table-dark'>

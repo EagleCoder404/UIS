@@ -2,6 +2,29 @@
 include_once("header.php");
 include_once("lemons.php");
 session_start();
+
+function home($user_type){
+    if($user_type=='a')
+    {
+        header("location:admin/");
+        die();
+    }
+    else if($user_type=='s')
+    {
+        header('location:student/');
+        die();
+    }
+    else if ($user_type=='t') {
+        header('location:teacher/');
+        die();
+    }
+    else{
+        die("user type not found");
+    }
+}
+
+if(isset($_SESSION['user_id']))
+    home($_SESSION['type']);
 $post = false;
 if (isset($_POST['submit'])) {
     $user_id = $_POST['user_id'];
