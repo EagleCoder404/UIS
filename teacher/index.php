@@ -43,6 +43,9 @@ include_once("../header.php");
                     <div class="col-sm">
                         <a href='group/create_internal.php' class='btn btn-lg btn-primary'>Create Internal</a>
                     </div>
+                    <div class="col-sm">
+                        <a href='group/create_attendance.php' class='btn btn-lg btn-primary'>Create Attendance</a>
+                    </div>
                 </div>
 
         </div>

@@ -1,7 +1,14 @@
 <?php
 session_start();
 include_once("../header.php");
-echo $_SESSION['user_id'];
+include_once("../lemons.php");
+$user_id = $_SESSION['user_id'];
+echo $user_id;
+$pdo = getCon();
+$group_rows = $pdo->query("select g.sem,g.group_id,g.comment,g.status from sgroup_members m,sgroup g where m.group_id=g.group_id and m.user_id='$user_id' order by g.sem desc")->fetchAll();
+$semesters = [[], [], [], [], [], [], [], []];
+foreach ($group_rows as $row)
+    array_push($semesters[$row['sem']], ['group_id' => $row['group_id'], 'comment' => $row['comment'], 'status' => $row['status']]);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,6 +34,9 @@ echo $_SESSION['user_id'];
             background-color: gray;
             color: white;
         }
+        .fixed-height{
+            height:400px;
+        }
     </style>
 </head>
 
@@ -34,44 +44,32 @@ echo $_SESSION['user_id'];
     <?= $html ?>
     <div class="container">
         <h1 class='display-1'> Student Panel</h1>
+        <div class='announcement-box container'>
 
-
-
+        </div>
+        <h1 class='display-3'>Semesters</h1>
         <div class="accordion" id="accordionExample">
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button collapsed type=" button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                        Semester
-                    </button>
-                </h2>
-                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <div class='group container my-4 border border-dark rounded p-3'>
-                            <p class='m-0'>GROUP ID</p>
-                        </div>
-                        <div class='group container my-4 border border-dark rounded p-3'>
-                            <p class='m-0'>GROUP ID</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Semester
-                    </button>
-                </h2>
-                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <div class='group container my-4 border border-dark rounded p-3'>
-                            <p class='m-0'>GROUP ID</p>
-                        </div>
-                        <div class='group container my-4 border border-dark rounded p-3'>
-                            <p class='m-0'>GROUP ID</p>
+            <?php foreach ($semesters as $sem => $groups) { ?>
+                <?php if ($groups) { ?> 
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type=" button" data-bs-toggle="collapse" data-bs-target="#<?= 'lol'.$sem ?>" aria-expanded="false" aria-controls="collapseOne">
+                            <?= $sem ?>
+                            </button>
+                        </h2>
+                        <div id="<?= 'lol'.$sem ?>" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <?php foreach($groups as $group){?>
+                                    <div class='group d-flex flex-row justify-content-between my-4 border border-dark rounded p-3'>
+                                        <p class='m-0'><?= $group['group_id']."  |  ".$group['comment'] ?></p>
+                                        <a href="group/group_details.php?group_id=<?= $group['group_id'] ?>" class='btn btn-primary'>Check It Out</a>
+                                    </div>
+                                <?php } ?>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                <?php } ?>
+            <?php } ?>
         </div>
     </div>
 </body>
