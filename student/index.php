@@ -6,7 +6,7 @@ accessStudent();
 $user_id = $_SESSION['user_id'];
 $pdo = getCon();
 $group_rows = $pdo->query("select g.sem,g.group_id,g.comment,g.status from sgroup_members m,sgroup g where m.group_id=g.group_id and m.user_id='$user_id' order by g.sem desc")->fetchAll();
-$announcements = $pdo->query("select u.user_id,u.first_name,u.last_name,a.body,a.time from announcement as a,account as u where a.user_id = u.user_id order by time")->fetchAll();
+$announcements = $pdo->query("select u.user_id,u.first_name,u.last_name,a.body,a.time from announcement as a,account as u where a.user_id = u.user_id order by time desc")->fetchAll();
 
 $semesters = [[], [], [], [], [], [], [], []];
 foreach ($group_rows as $row)
