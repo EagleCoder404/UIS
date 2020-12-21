@@ -33,50 +33,57 @@ $group_ids = json_encode($group_ids);
         .result:active {
             transform: scale(1.01);
         }
-        .fixed-height{
-            height:200px !important;
+
+        .fixed-height {
+            height: 200px !important;
         }
     </style>
 </head>
 
 <body>
     <?= $html ?>
-    <div class='col-sm'>
+    <div class='container'>
         <a href="../" class='btn btn-primary my-3'>Go Back</a>
-
-        <div class='container border border-dark p-2 rounded mb-3'>
-            <!-- group search bar -->
-            <div class='d-flex flex-column'>
-                <div class='form-floating'>
-                    <input type="text" class='form-control' id='group_key' placeholder="lol" oninput="updateSearchResults()">
-                    <label>Group ID Search</label>
-                </div>
-                <div class='mt-4 border border-secondary rounded p-2 d-flex flex-column overflow-auto' id='group-search-results'>
-
+        <div class='row'>
+            <div class='col-sm'>
+                <div class='container border border-dark p-2 rounded mb-3'>
+                    <!-- group search bar -->
+                    <div class='d-flex flex-column'>
+                        <div class='form-floating'>
+                            <input type="text" class='form-control' id='group_key' placeholder="lol" oninput="updateSearchResults()">
+                            <label>Group ID Search</label>
+                        </div>
+                        <div class='mt-4 border border-secondary rounded p-2 d-flex flex-column overflow-auto' id='group-search-results'>
+        
+                        </div>
+                    </div>
+                    <!-- selected group -->
+                    <div class='container'>
+                        <p>Group ID: <span id='current-gid'> </span></p>
+                    </div>
                 </div>
             </div>
-            <!-- selected group -->
-            <div class='container'>
-                <p>Group ID: <span id='current-gid'> </span></p>
+            <div class='col-sm'>
+                <div class='container border border-dark p-2 rounded mb-3'>
+                    <!-- subject search bar -->
+                    <div class='d-flex flex-column'>
+                        <div class='form-floating'>
+                            <input type="text" class='form-control' id='subject_key' placeholder="lol" oninput="updateSubjectSearchResults()">
+                            <label>Subject Search</label>
+                        </div>
+                        <div class='mt-4 border border-secondary rounded p-2 d-flex flex-column overflow-auto fixed-height' id='subject-search-results'>
+        
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        
+        <!-- selected subjects -->
+        <div class='container border border-dark p-3 rounded mb-3'>
+            <p>selected subjects</p>
+            <div class='container border border-dark rounded p-3' id='selected-subjects'>
 
-        <div class='container border border-dark p-2 rounded mb-3'>
-            <!-- subject search bar -->
-            <div class='d-flex flex-column'>
-                <div class='form-floating'>
-                    <input type="text" class='form-control' id='subject_key' placeholder="lol" oninput="updateSubjectSearchResults()">
-                    <label>Subject Search</label>
-                </div>
-                <div class='mt-4 border border-secondary rounded p-2 d-flex flex-column overflow-auto fixed-height' id='subject-search-results'>
-
-                </div>
-            </div>
-            <!-- selected subjects -->
-            <div class='container'>
-                <p>selected subjects</p>
-                <div class='container border border-dark rounded' id='selected-subjects'>
-                </div>
             </div>
         </div>
         <button class='btn btn-success' onclick="formSubmit()">Submit</button>
@@ -98,7 +105,7 @@ $group_ids = json_encode($group_ids);
             else {
                 selected_subject_ids.push(subject_id);
                 let selected_subjects_box = $('#selected-subjects');
-                selected_subjects_box.append(`<button onclick='removeSubject("${subject_id}");this.remove()'>${subject_id}</button>`);
+                selected_subjects_box.append(`<button class='btn btn-primary m-1' onclick='removeSubject("${subject_id}");this.remove()'>${subject_id}</button>`);
             }
         }
 
@@ -144,14 +151,20 @@ $group_ids = json_encode($group_ids);
                     search_results_box.append(`<span class='result p-1 rounded' onclick='addSubject("${subject_ids[i].subject_id}")'>${subject_ids[i].subject_id} ${subject_ids[i].title}</span>`)
             }
         }
-        function formSubmit(){
-            let data = {group_id:current_group_id,subjects:selected_subject_ids};
+
+        function formSubmit() {
+            let data = {
+                group_id: current_group_id,
+                subjects: selected_subject_ids
+            };
             $.ajax({
-                url:"actual_add_subject_lol.php",
-                data:data,
-                method:'POST',
-                success:function(response){
-                    console.log(response);
+                url: "actual_add_subject_lol.php",
+                data: data,
+                method: 'POST',
+                success: function(response) {
+                    response = JSON.parse(response);
+                    if (response.status == 'success')
+                        alert("Subjects succesfully added");
                 }
             })
         }

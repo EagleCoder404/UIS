@@ -172,7 +172,7 @@ $subject_ids = json_encode($subject_ids);
                                     $('#attendance-list').append(`                    
                                 <tr>
                                     <th scope="row">${element}</th>
-                                    <td><input type='number' class='attendance form-control' id='${element}'></td>
+                                    <td><input type='number' class='attendance form-control' id='${element}' required></td>
                                 </tr>
                                 `)
                             });
@@ -187,12 +187,17 @@ $subject_ids = json_encode($subject_ids);
             let title = $('#title')[0].value;
             let min_attendance = $('#min_attendance')[0].value;
             let attendance_list = []
-
+            let error=0;
             $('.attendance').each(function(){
                 let a = {user_id:this.id,attendance_percentage:this.value}
+                if(this.value=="")
+                    error=1;
                 attendance_list.push(a);
             })
 
+            if(error==1)
+                return;
+                
             let data = {
                 title: title,
                 min_attendance: min_attendance,
@@ -204,8 +209,11 @@ $subject_ids = json_encode($subject_ids);
                 url: 'attendance.php',
                 method: 'post',
                 data: data,
-                success: function(resp) {
-                    console.log(resp);
+                success: function(response) {
+                    console.log(response);
+                    response = JSON.parse(response);
+                    if(response.status='success')
+                        alert("Attendance Created");
                 }
             })
         }

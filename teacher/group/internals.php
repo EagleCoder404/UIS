@@ -6,7 +6,6 @@ $title = $_POST['title'];
 $max_marks = $_POST['max_marks'];
 $group_id = $_POST['group_id'];
 $grade_list = $_POST['grade_list'];
-echo var_dump($_POST);
 $dbh = getCon();
 
 $addInternal = $dbh->prepare("insert into internal(subject_id,title,max_marks) values(?,?,?)");
@@ -19,3 +18,4 @@ $setInternalGroup->execute([$internal_id,$group_id]);
 
 foreach($grade_list as $grade)
     $setMarks->execute([$grade['user_id'],$internal_id,$grade['grade']]);
+echo json_encode(['status'=>'success']);

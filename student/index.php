@@ -38,7 +38,7 @@ foreach ($group_rows as $row)
         }
 
         .fixed-height {
-            height: 400px;
+            max-height: 400px;
         }
     </style>
 </head>

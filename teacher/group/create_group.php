@@ -23,8 +23,8 @@ include_once("../../header.php");
 
 <body>
     <?= $html ?>
-    <div class="contianer-fluid mx-auto">
-        <a href="../" class='btn btn-primary'>Go Back</a>
+    <div class="container ">
+        <a href="../" class='btn btn-primary my-2'>Go Back</a>
         <div class='container form-box bg-light border border-dark p-sm-3'>
             <form action="" id='group-form'>
                 <div class='row mb-3'>

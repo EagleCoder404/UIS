@@ -172,7 +172,7 @@ $subject_ids = json_encode($subject_ids);
                                     $('#grade-list').append(`                    
                                 <tr>
                                     <th scope="row">${element}</th>
-                                    <td><input type='number' class='grade form-control' id='${element}'></td>
+                                    <td><input type='number' class='grade form-control' id='${element}' required></td>
                                 </tr>
                                 `)
                             });
@@ -205,7 +205,9 @@ $subject_ids = json_encode($subject_ids);
                 method: 'post',
                 data: data,
                 success: function(resp) {
-                    console.log(resp);
+                    response = JSON.parse(response);
+                    if(response.status='success')
+                        alert("Internal Created");
                 }
             })
         }

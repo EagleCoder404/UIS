@@ -72,7 +72,7 @@ $subject_ids = json_encode($subject_ids);
             </div>
             <div class='container my-2 p-3 flex-row  border border-dark rounded'>
                 <p>Here Lies users users with low attendance</p>
-                <div class='d-flex flex-row' id='users'>
+                <div class='d-flex flex-row flex-wrap' id='users'>
 
                 </div>
             </div>
@@ -159,7 +159,9 @@ $subject_ids = json_encode($subject_ids);
         }
 
         function loadLowAttendanceUsers() {
-            if ((current_subject_id == "") || (current_group_id == "") || (users == []))
+            users=[];
+            $('#users')[0].innerHTML="";
+            if ((current_subject_id == "") || (current_group_id == ""))
                 alert("inputs missing");
             else {
                 $.ajax({
@@ -219,7 +221,8 @@ $subject_ids = json_encode($subject_ids);
                 method: 'post',
                 data: data,
                 success: function(resp) {
-                    console.log(resp);
+                    if(resp)
+                        alert(`${resp} mails sent`);
                 }
             })
         }

@@ -18,3 +18,5 @@ $setAttendanceGroup->execute([$attendance_id,$group_id]);
 
 foreach($attendance_list as $attendance)
     $setPercentage->execute([$attendance['user_id'],$attendance_id,$attendance['attendance_percentage']]);
+    
+echo json_encode(['status'=>'success']);

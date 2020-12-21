@@ -11,5 +11,8 @@ $addSubject = $dbh->prepare("insert into sgroup_subjects values(?,?)");
 foreach($subjects as $subject_id){
     $subjectExists->execute([$subject_id,$group_id]);
     if($subjectExists->rowCount() == 0)
+    {
         $addSubject->execute([$subject_id,$group_id]);
+        echo json_encode(['status'=>'success']);
+    }
 }
