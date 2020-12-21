@@ -45,9 +45,8 @@ function accessTeacher()
           die();
      }
 }
-function accessFaculty(){
-     session_start();
-     if($_SESSION['type'] != 'a' || $_SESSION['type'] != 't')
+function accessStudent(){
+     if ($_SESSION['type'] != 's')
      {
           header("location:/UIS/app/");
           die();

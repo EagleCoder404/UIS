@@ -58,7 +58,7 @@ function searchUser() {
                                 ${row['first_name']} ${row['middle_name']} ${row['last_name']}
                             </div>
                             <div class='col'>
-                                <button class='btn btn-danger' onclick=deleteUser("${row['user_id']}")>Delete</button>
+                                <button class='btn btn-danger' onclick="deleteUser('${row['user_id']}');this.parentElement.parentElement.remove();alert('deleted')">Delete</button>
                             </div>
                         </div>
                     `

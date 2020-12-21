@@ -12,6 +12,10 @@ if(isset($_SESSION['user_id']))
         $home_link="/UIS/app/teacher/";
     else if($type=='a')
         $home_link=='/UIS/app/admin';
+    $logout_html =<<<EOD
+
+            <a class='btn btn-danger' href='/UIS/app/end_session.php'>Logout</a> 
+EOD;
 }
 $html =<<<EOD
     <nav class="navbar navbar-expand-md navbar-dark bg-dark m-sm-2 m-0">
@@ -22,6 +26,7 @@ $html =<<<EOD
                 <span class='d-inline d-sm-none'>BIT</span>
             </a>
             <span class='text-light'>$user_id</span>
+            $logout_html
         </div>
     </nav>
 EOD;

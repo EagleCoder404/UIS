@@ -127,7 +127,8 @@ include_once("../../header.php");
                 success: function(response) {
                     console.log(response);
                     response = JSON.parse(response);
-                    console.log(response);
+                    if(response.status='success')
+                        alert("Group Created");
                 }
             })
         }

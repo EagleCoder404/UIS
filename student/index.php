@@ -2,6 +2,7 @@
 session_start();
 include_once("../header.php");
 include_once("../lemons.php");
+accessStudent();
 $user_id = $_SESSION['user_id'];
 $pdo = getCon();
 $group_rows = $pdo->query("select g.sem,g.group_id,g.comment,g.status from sgroup_members m,sgroup g where m.group_id=g.group_id and m.user_id='$user_id' order by g.sem desc")->fetchAll();
