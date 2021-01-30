@@ -42,29 +42,29 @@ $subject_ids = json_encode($subject_ids);
         <h1 class='display-1'>Attendance Shortage</h1>
         <a href="../" class='btn btn-danger my-3'>Go Back</a>
         <form onsubmit="event.preventDefault();submitForm()">
-            <div class='row'>
-                <div class='col-sm  border p-2 rounded m-1'>
+            <div class='row p-2'>
+                <div class='col-sm  bg-warning border-dark p-2 rounded m-1'>
                     <!-- group search bar -->
                     <div class=''>
                         <div class='form-floating'>
-                            <input type="text" class='form-control' id='group_key' placeholder="lol" oninput="updateGroupSearchResults()">
+                            <input type="text" class='form-control border-dark' id='group_key' placeholder="lol" oninput="updateGroupSearchResults()">
                             <label>Group ID Search</label>
                         </div>
 
-                        <div class='mt-4 border border-secondary rounded p-2 d-flex flex-column overflow-auto h-100' id='group-search-results'>
+                        <div class='mt-4 border border-dark bg-white rounded p-2 d-flex flex-column overflow-auto h-100' id='group-search-results'>
 
                         </div>
                     </div>
                     <!-- selected group -->
                 </div>
-                <div class='col-sm border p-2 rounded m-1'>
+                <div class='col-sm border-dark bg-warning p-2 rounded m-1'>
                     <!-- subject-search-bar -->
                     <!-- <div class=''> -->
                     <div class='form-floating'>
-                        <input type="text" class='form-control' id='subject_key' placeholder="lol" oninput="updateSubjectSearchResults()">
+                        <input type="text" class='form-control border-dark' id='subject_key' placeholder="lol" oninput="updateSubjectSearchResults()">
                         <label>Subject Search</label>
                     </div>
-                    <div class='mt-4 border border-secondary rounded p-2 d-flex flex-column overflow-auto' id='subject-search-results'>
+                    <div class='mt-4 border border-dark bg-white rounded p-2 d-flex flex-column overflow-auto' id='subject-search-results'>
 
                     </div>
                     <!-- </div> -->
