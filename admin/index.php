@@ -170,18 +170,15 @@ accessAdmin();
                     <form onsubmit="event.preventDefault();searchUser()" id='searchUserDelete'>
                         <div class='row'>
 
-                            <div class='col-sm-3'>
-                                <select class="form-select form-select-md" name='search_param' required aria-label="Default select example">
-                                    <option selected>Search Param</option>
-                                    <option value="first_name">First name</option>
-                                    <option value="middle_name">Middle Name</option>
-                                    <option value="last_name">Last Name</option>
-                                    <option value="user_id">User ID</option>
-                                </select>
-                            </div>
-
                             <div class='col-sm'>
                                 <div class="input-group mb-3">
+                                    <select class="form-select form-select-md" name='search_param' required aria-label="Default select example">
+                                        <option selected>Search Param</option>
+                                        <option value="first_name">First name</option>
+                                        <option value="middle_name">Middle Name</option>
+                                        <option value="last_name">Last Name</option>
+                                        <option value="user_id">User ID</option>
+                                    </select>
                                     <input type="text" class="form-control" placeholder="Search Key" name='search_key' id='search_key' aria-label="Recipient's username" aria-describedby="basic-addon2" required>
                                     <button class='btn btn-primary'>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -332,7 +329,7 @@ accessAdmin();
                 <div class="modal-body">
                     <form action="">
                         <div class='form-floating'>
-                            <input type="text" class='form-control' name='body' id='announcement_body' placeholder="Announcement Text">
+                            <input type="text" class='form-control' name='body' id='announcement_body' autocomplete='off' placeholder="Announcement Text">
                             <label>Announcement Text</label>
                         </div>
                     </form>

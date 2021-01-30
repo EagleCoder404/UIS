@@ -39,8 +39,8 @@ $subject_ids = json_encode($subject_ids);
 <body>
     <?= $html ?>
     <div class='container'>
-        <a href="../" class='btn btn-primary my-3'>Go Back</a>
-
+        <h1 class='display-1'>Attendance Shortage</h1>
+        <a href="../" class='btn btn-danger my-3'>Go Back</a>
         <form onsubmit="event.preventDefault();submitForm()">
             <div class='row'>
                 <div class='col-sm  border p-2 rounded m-1'>
@@ -71,7 +71,7 @@ $subject_ids = json_encode($subject_ids);
                 </div>
             </div>
             <div class='container my-2 p-3 flex-row  border border-dark rounded'>
-                <p>Here Lies users users with low attendance</p>
+                <p>Here Lies users with low attendance</p>
                 <div class='d-flex flex-row flex-wrap' id='users'>
 
                 </div>

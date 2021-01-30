@@ -53,7 +53,6 @@ if (isset($_POST['submit'])) {
             $cred = false;
     } else
         $cred = false;
-    echo var_dump($cred);
 }
 ?>
 <!DOCTYPE html>

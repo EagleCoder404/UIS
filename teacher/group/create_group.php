@@ -24,8 +24,10 @@ include_once("../../header.php");
 <body>
     <?= $html ?>
     <div class="container ">
-        <a href="../" class='btn btn-primary my-2'>Go Back</a>
+        <h1 class='display-1'>Create a Group</h1>
+        <a href="../" class='btn btn-danger my-2'>Go Back</a>
         <div class='container form-box bg-light border border-dark p-sm-3'>
+
             <form action="" id='group-form'>
                 <div class='row mb-3'>
                     <div class='col-sm'>
@@ -127,8 +129,10 @@ include_once("../../header.php");
                 success: function(response) {
                     console.log(response);
                     response = JSON.parse(response);
-                    if(response.status='success')
+                    if(response.status=='success')
                         alert("Group Created");
+                    else
+                        alert(response.errors);
                 }
             })
         }

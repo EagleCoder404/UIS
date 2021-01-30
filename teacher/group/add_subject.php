@@ -35,7 +35,7 @@ $group_ids = json_encode($group_ids);
         }
 
         .fixed-height {
-            height: 200px !important;
+            height: 400px !important;
         }
     </style>
 </head>
@@ -43,17 +43,18 @@ $group_ids = json_encode($group_ids);
 <body>
     <?= $html ?>
     <div class='container'>
-        <a href="../" class='btn btn-primary my-3'>Go Back</a>
-        <div class='row'>
-            <div class='col-sm'>
-                <div class='container border border-dark p-2 rounded mb-3'>
+        <h1 class='display-1'>Add Subject</h1>
+        <a href="../" class='btn btn-danger my-3'>Go Back</a>
+        <div class='row p-2'>
+            <div class='col-sm-6'>
+                <div class='container bg-warning border border-dark p-2 rounded h-100'>
                     <!-- group search bar -->
                     <div class='d-flex flex-column'>
                         <div class='form-floating'>
-                            <input type="text" class='form-control' id='group_key' placeholder="lol" oninput="updateSearchResults()">
+                            <input type="text" class='form-control border border-dark' id='group_key' placeholder="lol" oninput="updateSearchResults()">
                             <label>Group ID Search</label>
                         </div>
-                        <div class='mt-4 border border-secondary rounded p-2 d-flex flex-column overflow-auto' id='group-search-results'>
+                        <div class='mt-4 border bg-white border-dark rounded p-2 d-flex flex-column overflow-auto fixed-height' id='group-search-results'>
         
                         </div>
                     </div>
@@ -63,15 +64,15 @@ $group_ids = json_encode($group_ids);
                     </div>
                 </div>
             </div>
-            <div class='col-sm'>
-                <div class='container border border-dark p-2 rounded mb-3'>
+            <div class='col-sm-6'>
+                <div class='container bg-warning border border-dark p-2 rounded h-100'>
                     <!-- subject search bar -->
                     <div class='d-flex flex-column'>
                         <div class='form-floating'>
-                            <input type="text" class='form-control' id='subject_key' placeholder="lol" oninput="updateSubjectSearchResults()">
+                            <input type="text" class='form-control border border-dark' id='subject_key' placeholder="lol" oninput="updateSubjectSearchResults()">
                             <label>Subject Search</label>
                         </div>
-                        <div class='mt-4 border border-secondary rounded p-2 d-flex flex-column overflow-auto fixed-height' id='subject-search-results'>
+                        <div class='mt-4 border border-dark bg-white rounded p-2 d-flex flex-column overflow-auto fixed-height' id='subject-search-results'>
         
                         </div>
                     </div>
@@ -91,9 +92,11 @@ $group_ids = json_encode($group_ids);
     </div>
     <script>
         let group_ids = <?= $group_ids ?>;
-        let current_group_id = "?";
+        let current_group_id = "";
 
         let subject_ids = <?= $subject_ids ?>;
+        let subject_id_title = [];
+        subject_ids.forEach( x => subject_id_title[x.subject_id]=x.title)
         let selected_subject_ids = [];
 
         updateSearchResults();
@@ -105,7 +108,7 @@ $group_ids = json_encode($group_ids);
             else {
                 selected_subject_ids.push(subject_id);
                 let selected_subjects_box = $('#selected-subjects');
-                selected_subjects_box.append(`<button class='btn btn-primary m-1' onclick='removeSubject("${subject_id}");this.remove()'>${subject_id}</button>`);
+                selected_subjects_box.append(`<button class='btn btn-primary m-1' onclick='removeSubject("${subject_id}");this.remove()' data-bs-toggle="tooltip" data-bs-placement="top" title="${subject_id_title[subject_id]}">${subject_id}</button>`);
             }
         }
 
@@ -157,14 +160,23 @@ $group_ids = json_encode($group_ids);
                 group_id: current_group_id,
                 subjects: selected_subject_ids
             };
+            if(current_group_id=="" || selected_subject_ids.length==0)
+            {
+                alert("Fill up the inputs first");
+                return;
+            }
             $.ajax({
                 url: "actual_add_subject_lol.php",
                 data: data,
                 method: 'POST',
                 success: function(response) {
+                    console.log(response);
                     response = JSON.parse(response);
                     if (response.status == 'success')
-                        alert("Subjects succesfully added");
+                        if(response.duplicates)
+                            alert(`${response.duplicates} subjects already existed and was ignored, the rest were added`);
+                        else
+                            alert("all subjects added");
                 }
             })
         }

@@ -38,31 +38,32 @@ $subject_ids = json_encode($subject_ids);
 <body>
     <?= $html ?>
     <div class='container'>
-        <a href="../" class='btn btn-primary my-3'>Go Back</a>
+        <h1 class='display-1'>Create Attendance List</h1>
+        <a href="../" class='btn btn-danger my-3'>Go Back</a>
 
         <form onsubmit="event.preventDefault();submitForm()">
-            <div class='row'>
-                <div class='col-sm  border p-2 rounded m-1'>
+            <div class='row p-2'>
+                <div class='col-sm  bg-warning border border-dark p-2 rounded m-1'>
                     <!-- group search bar -->
                     <div class=''>
                         <div class='form-floating'>
-                            <input type="text" class='form-control' id='group_key' placeholder="lol" oninput="updateGroupSearchResults()">
+                            <input type="text" class='form-control border border-dark' id='group_key' placeholder="lol" oninput="updateGroupSearchResults()">
                             <label>Group ID Search</label>
                         </div>
-                        <div class='mt-4 border border-secondary rounded p-2 d-flex flex-column overflow-auto h-100' id='group-search-results'>
+                        <div class='mt-4 border border-dark bg-white rounded p-2 d-flex flex-column overflow-auto h-100' id='group-search-results'>
 
                         </div>
                     </div>
                     <!-- selected group -->
                 </div>
-                <div class='col-sm border p-2 rounded m-1'>
+                <div class='col-sm bg-warning border border-dark p-2 rounded m-1'>
                     <!-- subject-search-bar -->
                     <!-- <div class=''> -->
                     <div class='form-floating'>
-                        <input type="text" class='form-control' id='subject_key' placeholder="lol" oninput="updateSubjectSearchResults()">
+                        <input type="text" class='form-control border border-dark' id='subject_key' placeholder="lol" oninput="updateSubjectSearchResults()">
                         <label>Subject Search</label>
                     </div>
-                    <div class='mt-4 border border-secondary rounded p-2 d-flex flex-column overflow-auto' id='subject-search-results'>
+                    <div class='mt-4 border border-dark bg-white rounded p-2 d-flex flex-column overflow-auto' id='subject-search-results'>
 
                     </div>
                     <!-- </div> -->
@@ -71,13 +72,13 @@ $subject_ids = json_encode($subject_ids);
             <div class='row my-3'>
                 <div class='col-sm '>
                     <div class='form-floating'>
-                        <input type="text" name='title' required class='form-control' id='title' placeholder="Title">
+                        <input type="text" name='title' required class='form-control border-dark' id='title' placeholder="Title">
                         <label for="">Attendance Title</label>
                     </div>
                 </div>
                 <div class='col-sm '>
                     <div class='form-floating'>
-                        <input type="number" name='min_attendance' required class='form-control' id='min_attendance' placeholder="Minimum Attendance">
+                        <input type="number" name='min_attendance' required class='form-control border-dark' id='min_attendance' placeholder="Minimum Attendance">
                         <label for="">Minimum Attendance</label>
                     </div>
                 </div>
@@ -194,7 +195,13 @@ $subject_ids = json_encode($subject_ids);
                     error=1;
                 attendance_list.push(a);
             })
-
+            for(let i=0;i<attendance_list.length;i++)
+                if(attendance_list[i]>100)
+                {
+                    alert("It percentage should be less than 100");
+                    return;
+                }
+            
             if(error==1)
                 return;
                 

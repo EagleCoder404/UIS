@@ -38,46 +38,49 @@ $subject_ids = json_encode($subject_ids);
 <body>
     <?= $html ?>
     <div class='container'>
-        <a href="../" class='btn btn-primary my-3'>Go Back</a>
-
+        <h1 class='display-1'>Create Internals</h1>
+        <a href="../" class='btn btn-danger my-3'>Go Back</a>        
         <form onsubmit="event.preventDefault();submitForm()">
-            <div class='row'>
-                <div class='col-sm  border p-2 rounded m-1'>
+            <div class='row p-2'>
+
+                <div class='col-sm bg-warning border-dark border p-2 rounded m-1'>
                     <!-- group search bar -->
                     <div class=''>
                         <div class='form-floating'>
-                            <input type="text" class='form-control' id='group_key' placeholder="lol" oninput="updateGroupSearchResults()">
+                            <input type="text" class='form-control border-dark' id='group_key' placeholder="lol" oninput="updateGroupSearchResults()">
                             <label>Group ID Search</label>
                         </div>
-                        <div class='mt-4 border border-secondary rounded p-2 d-flex flex-column overflow-auto h-100' id='group-search-results'>
+                        <div class='mt-4 border border-dark bg-white rounded p-2 d-flex flex-column overflow-auto h-100' id='group-search-results'>
 
                         </div>
                     </div>
                     <!-- selected group -->
                 </div>
-                <div class='col-sm border p-2 rounded m-1'>
+
+                <div class='col-sm bg-warning border border-dark p-2 rounded m-1'>
                     <!-- subject-search-bar -->
                     <!-- <div class=''> -->
                     <div class='form-floating'>
-                        <input type="text" class='form-control' id='subject_key' placeholder="lol" oninput="updateSubjectSearchResults()">
+                        <input type="text" class='form-control border-dark' id='subject_key' placeholder="lol" oninput="updateSubjectSearchResults()">
                         <label>Subject Search</label>
                     </div>
-                    <div class='mt-4 border border-secondary rounded p-2 d-flex flex-column overflow-auto' id='subject-search-results'>
+                    <div class='mt-4 border border-dark bg-white rounded p-2 d-flex flex-column overflow-auto' id='subject-search-results'>
 
                     </div>
                     <!-- </div> -->
                 </div>
+
             </div>
             <div class='row my-3'>
                 <div class='col-sm '>
                     <div class='form-floating'>
-                        <input type="text" name='title' required class='form-control' id='title' placeholder="Title">
+                        <input type="text" name='title' required class='form-control border-dark' id='title' placeholder="Title">
                         <label for="">Internal Title</label>
                     </div>
                 </div>
                 <div class='col-sm '>
                     <div class='form-floating'>
-                        <input type="number" name='max_marks' required class='form-control' id='max_marks' placeholder="Max Marks">
+                        <input type="number" name='max_marks' required class='form-control border-dark' id='max_marks' placeholder="Max Marks">
                         <label for="">Max Marks</label>
                     </div>
                 </div>
@@ -156,6 +159,7 @@ $subject_ids = json_encode($subject_ids);
                         group_id: current_group_id
                     },
                     success: function(response) {
+                        console.log(response);
                         response = JSON.parse(response);
                         if(response.length){
                             let user_ids = response[0];
@@ -187,12 +191,23 @@ $subject_ids = json_encode($subject_ids);
             let title = $('#title')[0].value;
             let max_marks = $('#max_marks')[0].value;
             let grade_list = []
-
+            if(title=="" || max_marks=="")
+            {
+                alert("Enter inputs");
+                return;
+            }
             $('.grade').each(function(){
                 let user_grade = {user_id:this.id,grade:this.value}
                 grade_list.push(user_grade);
             })
-
+            
+            for(let i=0;i<grade_list.length;i++)
+                if(grade_list[i]>max_marks)
+                {
+                    alert("marks should be less than "+max_marks);
+                    return;
+                }
+            
             let data = {
                 title: title,
                 max_marks: max_marks,
@@ -204,7 +219,7 @@ $subject_ids = json_encode($subject_ids);
                 url: 'internals.php',
                 method: 'post',
                 data: data,
-                success: function(resp) {
+                success: function(response) {
                     response = JSON.parse(response);
                     if(response.status='success')
                         alert("Internal Created");

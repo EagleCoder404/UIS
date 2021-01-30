@@ -1,4 +1,7 @@
 <?php
+  require '../vendor/autoload.php';
+  use Carbon\Carbon;
+  date_default_timezone_set("Asia/Kolkata");
 session_start();
 include_once("../header.php");
 include_once("../lemons.php");
@@ -56,8 +59,12 @@ foreach ($group_rows as $row)
                         <p class='lead'>
                             <?= $x['body'] ?>
                         </p>
+                        <?php
+                            $dt = Carbon::parse($x['time']);
+                            $x['time']= $dt->diffForHumans();
+                        ?>
                         <div class='d-flex d-row border-top  border-dark justify-content-between'>
-                            <p class='text-capitalize'><?= $x['user_id'] . " / " . $x['first_name'] . " " . $x['last_name'] ?></p>
+                            <p class='text-capitalize text-secondary'><?= $x['user_id'] . " / " . $x['first_name'] . " " . $x['last_name'] ?></p>
                             <p class='text-muted'><?= $x['time'] ?></p>
                         </div>
 
