@@ -13,7 +13,7 @@ function addUser(e) {
         alert("phone number should only have numbers");
         return;
     }
-    if()
+
     console.log(data);
     $.ajax({
         url: "user/add_user.php",
