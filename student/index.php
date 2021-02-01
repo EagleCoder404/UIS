@@ -43,6 +43,9 @@ foreach ($group_rows as $row)
         .fixed-height {
             max-height: 400px;
         }
+        .subtext{
+            font-size: 12px !important;
+        }
     </style>
 </head>
 
@@ -55,7 +58,8 @@ foreach ($group_rows as $row)
 
             <div class='announcement-list container p-3 border border-dark overflow-auto rounded fixed-height'>
                 <?php foreach ($announcements as $x) { ?>
-                    <div class='container mb-2 p-3 border border-dark rounded'>
+
+                    <div class='container mb-2 p-2 border border-dark rounded'>
                         <p class='lead'>
                             <?= $x['body'] ?>
                         </p>
@@ -63,12 +67,13 @@ foreach ($group_rows as $row)
                             $dt = Carbon::parse($x['time']);
                             $x['time']= $dt->diffForHumans();
                         ?>
-                        <div class='d-flex d-row border-top  border-dark justify-content-between'>
-                            <p class='text-capitalize text-secondary'><?= $x['user_id'] . " / " . $x['first_name'] . " " . $x['last_name'] ?></p>
-                            <p class='text-muted'><?= $x['time'] ?></p>
+                        <div class='d-flex d-row border-top  border-dark subtext justify-content-between'>
+                            <span class='text-capitalize text-secondary'><?= $x['user_id'] . " / " . $x['first_name'] . " " . $x['last_name'] ?></span>
+                            <span class='text-muted'><?= $x['time'] ?></span>
                         </div>
 
                     </div>
+
                 <?php } ?>
             </div>
 
