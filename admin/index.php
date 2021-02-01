@@ -344,6 +344,11 @@ accessAdmin();
     <script>
         function announce() {
             let body = $('#announcement_body')[0].value;
+            if(body=="")
+            {
+                alert("Announcment cannot be empty")
+                return;
+            }
             $.ajax({
                 url: "user/make_announcement.php",
                 method: 'POST',
