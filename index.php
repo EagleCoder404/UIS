@@ -65,6 +65,7 @@ if (isset($_POST['submit'])) {
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@800&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <style>
         * {
             margin: 0px;
@@ -75,7 +76,7 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-    <div class='container'>
+    <div class='container animate__animated animate__fadeInUp'>
         <div class=' mx-auto my-5 w-50 rounded border border-dark p-3'>
             <div class='d-flex flex-row mb-3 justify-content-center'>
                 <div class=' mb-3 mx-2 px-3 display-4  rounded bg-primary text-light '>

@@ -18,7 +18,7 @@ if(isset($_SESSION['user_id']))
 EOD;
 }
 $html =<<<EOD
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark m-sm-2 m-0">
+    <nav class="  navbar navbar-expand-md navbar-dark bg-dark m-sm-2 m-0">
         <div class="container-fluid px-2">
             <a class="navbar-brand" href="$home_link">
                 <span class='bg-primary px-3 py-2'>UIS</span>

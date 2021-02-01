@@ -14,6 +14,7 @@ accessAdmin();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@800&amp;display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <style>
         * {
             margin: 0px;
@@ -31,7 +32,7 @@ accessAdmin();
 <body class='bg-light'>
     <?= $html ?>
     <div class='container'>
-        <div class='jumbotron display-1 text-decoration-underline'>
+        <div class='jumbotron animate__animated animate__shakeX display-1 text-decoration-underline'>
             Admin Panel
         </div>
         <div class='settings-menu p-3'>
@@ -344,8 +345,7 @@ accessAdmin();
     <script>
         function announce() {
             let body = $('#announcement_body')[0].value;
-            if(body=="")
-            {
+            if (body == "") {
                 alert("Announcment cannot be empty")
                 return;
             }

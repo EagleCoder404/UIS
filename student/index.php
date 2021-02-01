@@ -1,7 +1,9 @@
 <?php
-  require '../vendor/autoload.php';
-  use Carbon\Carbon;
-  date_default_timezone_set("Asia/Kolkata");
+require '../vendor/autoload.php';
+
+use Carbon\Carbon;
+
+date_default_timezone_set("Asia/Kolkata");
 session_start();
 include_once("../header.php");
 include_once("../lemons.php");
@@ -21,6 +23,7 @@ foreach ($group_rows as $row)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
@@ -43,33 +46,44 @@ foreach ($group_rows as $row)
         .fixed-height {
             max-height: 400px;
         }
-        .subtext{
+
+        .subtext {
             font-size: 12px !important;
+        }
+
+        .announcement-list ::-webkit-scrollbar {
+            width: 0px !important;
+            background: transparent !important;
+        }
+
+        ::-webkit-scrollbar {
+            width: 0px !important;
+            background: transparent !important;
         }
     </style>
 </head>
 
 <body class='bg-light'>
     <?= $html ?>
-    <div class="container">
+    <div class="container ">
 
         <div class='announcement-box container'>
             <h1 class='display-3'>Annoucements</h1>
 
-            <div class='announcement-list container p-3 border border-dark overflow-auto rounded fixed-height'>
+            <div class='announcement-list animate__animated animate__headShake container p-3 border border-dark overflow-auto rounded fixed-height'>
                 <?php foreach ($announcements as $x) { ?>
 
-                    <div class='container mb-2 p-2 border border-dark rounded'>
+                    <div class='container bg-warning mb-2 p-2 border border-dark rounded'>
                         <p class='lead'>
                             <?= $x['body'] ?>
                         </p>
                         <?php
-                            $dt = Carbon::parse($x['time']);
-                            $x['time']= $dt->diffForHumans();
+                        $dt = Carbon::parse($x['time']);
+                        $x['time'] = $dt->diffForHumans();
                         ?>
-                        <div class='d-flex d-row border-top  border-dark subtext justify-content-between'>
-                            <span class='text-capitalize text-secondary'><?= $x['user_id'] . " / " . $x['first_name'] . " " . $x['last_name'] ?></span>
-                            <span class='text-muted'><?= $x['time'] ?></span>
+                        <div class='d-flex d-row border-top  bg-success p-1 text-light border-dark subtext justify-content-between'>
+                            <span class='text-capitalize '><?= $x['user_id'] . " / " . $x['first_name'] . " " . $x['last_name'] ?></span>
+                            <span class=''><?= $x['time'] ?></span>
                         </div>
 
                     </div>

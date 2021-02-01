@@ -89,6 +89,7 @@ function deleteUser(user_id) {
         }
     });
 }
+
 function searchUserModify() {
     let data = {}
     $('#searchUserModify :input').each(function () {
