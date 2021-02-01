@@ -8,6 +8,12 @@ function addUser(e) {
         let input = $(this)[0];
         data[input.name] = input.value;
     })
+    if(isNaN(data['phone_number']))
+    {
+        alert("phone number should only have numbers");
+        return;
+    }
+    if()
     console.log(data);
     $.ajax({
         url: "user/add_user.php",
