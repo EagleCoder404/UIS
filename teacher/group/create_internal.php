@@ -202,11 +202,19 @@ $subject_ids = json_encode($subject_ids);
             })
             
             for(let i=0;i<grade_list.length;i++)
-                if(grade_list[i]>max_marks)
+            {
+                if(parseInt(grade_list[i].grade) < 0)
+                {
+                    alert("Negative marks not allowed ;)");
+                    return;
+                }
+                if(parseInt(grade_list[i].grade)>parseInt(max_marks))
                 {
                     alert("marks should be less than "+max_marks);
                     return;
                 }
+
+            }
             
             let data = {
                 title: title,

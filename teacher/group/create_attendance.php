@@ -196,11 +196,14 @@ $subject_ids = json_encode($subject_ids);
                 attendance_list.push(a);
             })
             for(let i=0;i<attendance_list.length;i++)
-                if(attendance_list[i]>100)
+            {
+                let a = parseInt(attendance_list[i].attendance_percentage)
+                if(a>100 || a<0)
                 {
-                    alert("It percentage should be less than 100");
+                    alert("It percentage should be less than 100 and greater than zero");
                     return;
                 }
+            }
             
             if(error==1)
                 return;
